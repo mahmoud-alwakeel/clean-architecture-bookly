@@ -1,5 +1,5 @@
 class RetailPrice {
-  double? amount;
+  num? amount;
   String? currencyCode;
 
   RetailPrice({this.amount, this.currencyCode});
