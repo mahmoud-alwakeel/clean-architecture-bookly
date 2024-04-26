@@ -5,7 +5,7 @@ import 'package:bookly/core/utils/api_service.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-final GetIt getIt = GetIt.instance();
+final GetIt getIt = GetIt.instance;
 
 void setupServiceLocator() {
   getIt.registerSingleton<HomeRepoImpl>(

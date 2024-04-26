@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 class CommonCommands {
     static void hiveSaveBooksData(List<BookEntity> booksList, String boxName) {
-    var box = Hive.box(boxName);
+    var box = Hive.box<BookEntity>(boxName);
     box.addAll(booksList);
   }
 

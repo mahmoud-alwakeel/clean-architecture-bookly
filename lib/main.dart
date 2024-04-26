@@ -10,6 +10,7 @@ import 'package:bookly/constants.dart';
 import 'package:bookly/core/utils/api_service.dart';
 import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/setup_service_locator.dart';
+import 'package:bookly/core/utils/simple_bloc_observer.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,7 @@ import 'package:hive_flutter/adapters.dart';
 
 void main() async {
   setupServiceLocator();
+  Bloc.observer = SimpleBlocObserver();
   await Hive.initFlutter();
   Hive.registerAdapter(BookEntityAdapter());
   await Hive.openBox<BookEntity>(kFeaturedBox);
@@ -37,7 +39,7 @@ class Bookly extends StatelessWidget {
               FetchFeaturedBooksUseCase(
                 homeRepo: getIt.get<HomeRepoImpl>(),
               ),
-            );
+            )..fetchFeaturedBooks();
           }),
           BlocProvider(create: (context) {
             return NewestBooksCubit(
