@@ -17,7 +17,7 @@ class FeaturedBooksListViewBlocBuilder extends StatelessWidget {
             books: state.books,
           );
         } else if (state is FeaturedBooksFailure) {
-          return Text(state.errorMessage);
+          return Center(child: Text(state.errorMessage));
         } else {
           return const Center(child: CircularProgressIndicator());
         }

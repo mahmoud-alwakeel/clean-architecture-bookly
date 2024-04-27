@@ -3,15 +3,21 @@ import 'package:bookly/constants.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class HomeLocalDataSource {
-  List<BookEntity> fetchFeaturedBooks();
+  List<BookEntity> fetchFeaturedBooks({int pageNum = 0});
   List<BookEntity> fetchNewestBooks();
 }
 
 class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   @override
-  List<BookEntity> fetchFeaturedBooks() {
+  List<BookEntity> fetchFeaturedBooks({int pageNum = 0}) {
+    int startIndex = pageNum * 10;
+    int endIndex = (pageNum + 1) * 10;
     var box = Hive.box<BookEntity>(kFeaturedBox);
-    return box.values.toList();
+    int length = box.values.length;
+    if (startIndex >= length || endIndex > length) {
+      return [];
+    }
+    return box.values.toList().sublist(startIndex, endIndex);
   }
 
   @override
