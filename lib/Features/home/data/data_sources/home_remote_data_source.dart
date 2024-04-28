@@ -20,7 +20,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     var data = await apiService.get(
         endPoint: "volumes?Filtering=free-ebooks&q=programming&startIndex=${pageNum * 10}");
     List<BookEntity> booksList = getBooksList(data);
-    CommonCommands.hiveSaveBooksData(booksList, kFeaturedBox);
+    CommonCommands().hiveSaveBooksData(booksList, kFeaturedBox);
     return booksList;
   }
 
@@ -29,7 +29,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     var data = await apiService.get(
         endPoint: "volumes?Filtering=free-ebooks&sorting=newest&q=programming");
     List<BookEntity> booksList = getBooksList(data);
-    CommonCommands.hiveSaveBooksData(booksList, kNewestBox);
+    CommonCommands().hiveSaveBooksData(booksList, kNewestBox);
     return booksList;
   }
 
